@@ -1,73 +1,95 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 const Login = () => {
   return (
     <>
+    {/*
+  Heads up! 👋
 
-      <div className="relative py-16">
-        <div className="container relative m-auto px-6 text-gray-500 md:px-12 xl:px-40">
-          <div className="m-auto space-y-8 md:w-8/12 lg:w-6/12 xl:w-6/12">
-          <Link to='/'>
-                <p className="flex title-font font-medium items-center text-white mb-4 md:mb-0 cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                    </svg>
-                    
-                        <span className="ml-3 text-xl">Blog App</span>
-                </p></Link>
-            <div className="rounded-3xl border border-gray-100 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-2xl shadow-gray-600/10 backdrop-blur-2xl">
-              <div className="p-8 py-12 sm:p-16">
-                <h2 className="mb-8 text-2xl font-bold text-gray-800 dark:text-white">Sign in to your account</h2>
-                <form action="" className="space-y-8">
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-gray-600 dark:text-gray-300">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      autoComplete="username"
-                      className="focus:outline-none block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
-                    />
-                  </div>
+  Plugins:
+    - @tailwindcss/forms
+*/}
 
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <label htmlFor="pwd" className="text-gray-600 dark:text-gray-300">Password</label>
-                      <button className="-mr-2 p-2" type="reset">
-                        <span className="text-sm text-primary">Forgot your password ?</span>
-                      </button>
-                    </div>
-                    <input
-                      type="password"
-                      name="pwd"
-                      id="pwd"
-                      autoComplete="current-password"
-                      className="focus:outline-none block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent px-4 py-3 text-gray-600 transition duration-300 invalid:ring-2 invalid:ring-red-400 focus:ring-2 focus:ring-cyan-300"
-                    />
-                  </div>
+<section className="bg-white">
+  <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
+    <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
+      <img
+        alt=""
+        src="https://images.unsplash.com/photo-1724926201899-40530ae44ee4?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+    </aside>
 
-                  <button type="submit" className="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
-                    <span className="relative text-base font-semibold text-white dark:text-dark">Connect</span>
-                  </button>
+    <main
+      className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+    >
+      <div className="max-w-xl lg:max-w-3xl">
+        <a className="block text-blue-600" href="/">
+        
+          <span>Home</span>
+        </a>
+        <h1 className="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+          Welcome to Blog App
+        </h1>
+        
 
-                  <p className="border-t border-gray-100 dark:border-gray-700 pt-6 text-sm text-gray-500 dark:text-gray-400">
-                    Don't have an account ?
-                    <a href="#" className="text-primary">Sign up</a>
-                  </p>
-                </form>
-              </div>
-            </div>
-            <div className="space-x-4 text-center text-gray-500">
-              <span>&copy; tailus</span>
-              <a href="#" className="text-sm hover:text-primary">Contact</a>
-              <a href="#" className="text-sm hover:text-primary">Privacy & Terms</a>
-            </div>
+        <p className="mt-4 leading-relaxed text-gray-500">
+        Share your thoughts, engage with the community, and stay updated with the latest posts from your favorite writers.
+        </p>
+
+        <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+          
+
+          
+
+          <div className="col-span-6">
+            <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Email </label>
+
+            <input
+              type="email"
+              id="Email"
+              name="email"
+              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
           </div>
-        </div>
-      </div>
 
+          <div className="col-span-6">
+            <label htmlFor="Password" className="block text-sm font-medium text-gray-700"> Password </label>
+
+            <input
+              type="password"
+              id="Password"
+              name="password"
+              className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+          </div>
+
+          
+
+          
+
+          
+
+          <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
+            <button
+              className="inline-block shrink-0 rounded-md border border-gray-900 bg-gray-900 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-gray-900 focus:outline-none focus:ring active:text-gray-900"
+            >
+              Login
+            </button>
+
+            
+          </div>
+          <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+              New User?
+              <a href="/register" className="block text-gray-700 underline">Sign Up</a>.
+            </p>
+        </form>
+      </div>
+    </main>
+  </div>
+</section>
     </>
+
   )
 }
 
