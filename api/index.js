@@ -1,10 +1,17 @@
-import express from 'express';
+import express, { json } from 'express';
+import cors from 'cors';
+import userRoutes from './routes/userRoutes.js'
+import dotenv from 'dotenv';
+import connect from './db/connect.js';
 
-const port = 3000;
+dotenv.config();
+
+connect();
+const port = process.env.PORT;
 const app = express();
+app.use(express.json());
+app.use(cors())
 
-app.use('/', (req,res)=>{
-    res.send('Hello')
-})
+app.use('/', userRoutes);
 
-app.listen(port, ()=>console.log(`Server started on http://localhost:${port}`))
+app.listen(port, ()=>console.log(`Server started on http://localhost:${port}`));
