@@ -7,10 +7,14 @@ import connect from './db/connect.js';
 dotenv.config();
 
 connect();
+
 const port = process.env.PORT;
+
 const app = express();
+
 app.use(express.json());
-app.use(cors())
+
+app.use(cors());
 
 app.use('/', userRoutes);
 
