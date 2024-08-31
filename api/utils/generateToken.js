@@ -14,4 +14,14 @@ const generateToken = (res, username)=>{
     console.log('Token Generated:', token);
 }
 
-export default generateToken;
+const deleteToken = (res) => {
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+    });
+
+    console.log('Token Destroyed');
+}
+
+export  {generateToken, deleteToken};

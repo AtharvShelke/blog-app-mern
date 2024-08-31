@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
 
     const [username, setUsername] = useState(null)
+    const [showModal, setShowModal] = useState(false)
+    const navigate = useNavigate()
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
@@ -21,12 +23,32 @@ const Navbar = () => {
                 setUsername(userInfo.username);
             } catch (error) {
                 console.error('Error fetching user info:', error);
-                
+
             }
         };
 
         fetchUserInfo();
     }, []);
+
+    const logout = async() => {
+        try {
+            const response = await fetch('http://localhost:3000/logout', {
+                method:'POST',
+                credentials:'include'
+            })
+            if (response.ok) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('username');
+                navigate('/login')
+            }else{
+                console.error('Logout failed', response);
+            alert('Logout failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Logout failed', error.message);
+            alert('Logout failed. Please try again.');
+        }
+    }
     return (
 
         <header className="text-gray-400 bg-gray-900 body-font">
@@ -49,7 +71,11 @@ const Navbar = () => {
                                 <p className="mr-5 hover:text-white cursor-pointer">{username}</p>
                             </Link>
 
-                            
+
+                            <p className="mr-5 hover:text-white cursor-pointer" onClick={()=>{
+                                setShowModal(true)
+                            }}>Logout</p>
+
                         </>
                     ) : (
                         <>
@@ -68,7 +94,35 @@ const Navbar = () => {
                 </nav>
 
             </div>
+            {showModal ? (
+                <>
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+                            <h2 className="text-xl font-semibold mb-4">Logout</h2>
+                            <p className="mb-6">Are you sure you want to log out?</p>
+                            <div className="flex justify-end">
+                                <button
+                                    onClick={() => { setShowModal(false) }}
+                                    className="mr-4 px-4 py-2 bg-gray-300 rounded-md text-gray-700 hover:bg-gray-400"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={() => { 
+                                        logout();
+                                        setShowModal(false)
+                                     }}
+                                    className="px-4 py-2 bg-red-600 rounded-md text-white hover:bg-red-700"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            ) : null}
         </header>
+
 
     )
 }

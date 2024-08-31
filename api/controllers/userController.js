@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
-import generateToken from '../utils/generateToken.js';
+import {generateToken, deleteToken} from '../utils/generateToken.js';
 
 // register user
 // POST
@@ -63,6 +63,9 @@ const loginUser = asyncHandler(async(req,res) => {
     
 });
 
+// get user profile
+// GET
+// /profile
 
 const profileUser = (req,res) => {
     const {token} = req.cookies;
@@ -73,4 +76,16 @@ const profileUser = (req,res) => {
     
 }
 
-export { registerUser,loginUser, profileUser };
+// logout 
+// POST
+const logoutUser = asyncHandler(async (req, res) => {
+    try {
+        deleteToken(res); // This should clear the token
+        res.status(200).json({ message: 'Logout successful' }); // Respond to client
+    } catch (error) {
+        console.error('Logout failed:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
+export { registerUser,loginUser, profileUser, logoutUser };
