@@ -14,14 +14,14 @@ const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password, confirmPassword } = req.body;
 
     if (password !== confirmPassword) {
-        res.status(400);
-        throw new Error('Passwords do not match')
+        res.status(400).json({message:'Passwords do not match'})
+        
     }
 
     const userExists = await User.findOne({ email })
     if (userExists) {
-        res.status(400)
-        throw new Error("User Already Exists");
+        res.status(400).json({message:'User Already Exists'})
+        
     }
     try {
         const hashedPassword = await bcrypt.hash(password, 10)
@@ -44,21 +44,33 @@ const registerUser = asyncHandler(async (req, res) => {
 // POST 
 // /login
 const loginUser = asyncHandler(async(req,res) => {
-    const {email, password} = req.body;
-    const user = await User.findOne({ email })
+    
+    const {username, password} = req.body;
+    const user = await User.findOne({ username })
     if(user && (await bcrypt.compare(password, user.password))){
-        
-       res.status(201).json({
-        _id:user._id,
-        email:user.email,
-        username:user.username,
-        token:generateToken(user._id)
-       });
+
+        generateToken(res, username);
+        res.status(201).json({
+            _id:user._id,
+            username:user.username,
+            email:user.email
+        })
+       
     } else {
-        res.status(400);
-        throw new Error('Invalid user data')
+        res.status(400).json({message:'Invalid Credentials'})
+        
     }
+    
 });
 
 
-export { registerUser,loginUser };
+const profileUser = (req,res) => {
+    const {token} = req.cookies;
+    jwt.verify(token, secret, {}, (err, info)=>{
+        if (err) throw err;
+        res.json(info)
+    });
+    
+}
+
+export { registerUser,loginUser, profileUser };

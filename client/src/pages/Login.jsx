@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const loginUser = async (e) => {
     e.preventDefault();
   
     const response = await fetch('http://localhost:3000/login', {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
-      headers: { 'Content-Type': 'application/json' }
+      body: JSON.stringify({ username, password }),
+      headers: { 'Content-Type': 'application/json' },
+      credentials:'include',
     });
   
     if (response.ok) {
       const data = await response.json();
       console.log(data.token);
       localStorage.setItem('token', data.token)
+      navigate('/')
       
-      alert('Login Successful')
 
     } else {
+
       alert('Login Failed');
+      console.log(response.body)
     }
   };
 
@@ -63,14 +69,14 @@ const Login = () => {
 
 
                 <div className="col-span-6">
-                  <label htmlFor="Email" className="block text-sm font-medium text-gray-700"> Email </label>
+                  <label htmlFor="username" className="block text-sm font-medium text-gray-700"> Username </label>
 
                   <input
-                    type="email"
-                    id="Email"
-                    name="email"
+                    type="text"
+                    id="username"
+                    name="username"
                     className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                    onChange={(e)=>{setEmail(e.target.value)}}
+                    onChange={(e)=>{setUsername(e.target.value)}}
                   />
                 </div>
 
@@ -104,7 +110,7 @@ const Login = () => {
                 </div>
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   New User?
-                  <a href="/register" className="block text-gray-700 underline">Sign Up</a>.
+                  <a href="/register" className="block text-gray-700 underline">Sign Up</a>
                 </p>
               </form>
             </div>
