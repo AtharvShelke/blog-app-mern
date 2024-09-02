@@ -4,9 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
 
-    const [username, setUsername] = useState(null)
-    const [showModal, setShowModal] = useState(false)
-    const navigate = useNavigate()
+    const [username, setUsername] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
@@ -30,19 +32,19 @@ const Navbar = () => {
         fetchUserInfo();
     }, []);
 
-    const logout = async() => {
+    const logout = async () => {
         try {
             const response = await fetch('http://localhost:3000/logout', {
-                method:'POST',
-                credentials:'include'
+                method: 'POST',
+                credentials: 'include'
             })
             if (response.ok) {
                 localStorage.removeItem('token');
-                localStorage.removeItem('username');
+
                 navigate('/login')
-            }else{
+            } else {
                 console.error('Logout failed', response);
-            alert('Logout failed. Please try again.');
+                alert('Logout failed. Please try again.');
             }
         } catch (error) {
             console.error('Logout failed', error.message);
@@ -67,12 +69,10 @@ const Navbar = () => {
                             <Link to='/create'>
                                 <p className="mr-5 hover:text-white cursor-pointer">Create</p>
                             </Link>
-                            <Link to='/profile'>
-                                <p className="mr-5 hover:text-white cursor-pointer">{username}</p>
-                            </Link>
 
+                            <p className="mr-5 hover:text-white cursor-pointer">{username}</p>
 
-                            <p className="mr-5 hover:text-white cursor-pointer" onClick={()=>{
+                            <p className="mr-5 hover:text-white cursor-pointer" onClick={() => {
                                 setShowModal(true)
                             }}>Logout</p>
 
@@ -98,7 +98,7 @@ const Navbar = () => {
                 <>
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                         <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-                            <h2 className="text-xl font-semibold mb-4">Logout</h2>
+                            <h2 className="text-xl font-semibold mb-4 text-gray-900">Logout</h2>
                             <p className="mb-6">Are you sure you want to log out?</p>
                             <div className="flex justify-end">
                                 <button
@@ -108,10 +108,10 @@ const Navbar = () => {
                                     Cancel
                                 </button>
                                 <button
-                                    onClick={() => { 
+                                    onClick={() => {
                                         logout();
                                         setShowModal(false)
-                                     }}
+                                    }}
                                     className="px-4 py-2 bg-red-600 rounded-md text-white hover:bg-red-700"
                                 >
                                     Logout

@@ -11,8 +11,11 @@ import {generateToken, deleteToken} from '../utils/generateToken.js';
 const secret = 'asdfghjkl'
 
 const registerUser = asyncHandler(async (req, res) => {
+
+    //take the input fields from client
     const { username, email, password, confirmPassword } = req.body;
 
+    //validate
     if (password !== confirmPassword) {
         res.status(400).json({message:'Passwords do not match'})
         

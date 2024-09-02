@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 
 import PostContainer from '../components/PostContainer'
+import Footer from '../components/Footer'
 
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
       <Navbar/>
       <Hero/>
       <PostContainer/>
-      
+      <Footer/>
     </>
   )
 }

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const {setUserInfo} = useContext(UserContext)
   const navigate = useNavigate();
 
   const loginUser = async (e) => {
@@ -12,15 +13,16 @@ const Login = () => {
   
     const response = await fetch('http://localhost:3000/login', {
       method: 'POST',
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ username, password }),     //sending data to backend
       headers: { 'Content-Type': 'application/json' },
       credentials:'include',
     });
   
     if (response.ok) {
       const data = await response.json();
-      console.log(data.token);
+      
       localStorage.setItem('token', data.token)
+      setUserInfo(data)
       navigate('/')
       
 

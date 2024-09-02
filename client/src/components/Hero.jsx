@@ -1,22 +1,73 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Navbar from './Navbar'
 
 const Hero = () => {
     return (
         <>
-            <section className="text-gray-600 body-font">
-                <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-                    <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
-                        <img className="object-cover object-center rounded" alt="hero" src="https://images.unsplash.com/photo-1724745622131-67c190438f60?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
-                    </div>
-                    <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-                        <h1 className="title-font sm:text-4xl text-3xl mb-2 font-medium text-gray-900">Exploring the Grandeur of Ancient Roman Architecture
-                            
-                        </h1>
-                        <p className="text-sm mb-3">Date:29/08/2024</p>
-                        <p className="mb-8 leading-relaxed text-xl">Ancient Roman architecture is a testament to the ingenuity, ambition, and grandeur of one of history’s most powerful civilizations. The Romans were master builders, borrowing heavily from their predecessors, the Greeks, and Etruscans, while also introducing innovations that would set their structures apart.</p>
-                        <div className="flex justify-center">
-                            <Link to='/blog'><button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Read More</button></Link>
+        
+            <section className="bg-white dark:bg-gray-900">
+                <div className="container px-6 py-10 mx-auto">
+                    <div className="lg:flex lg:-mx-6">
+                        <div className="lg:w-3/4 lg:px-6">
+                            <img className="object-cover object-center w-full h-80 xl:h-[28rem] rounded-xl" src="https://images.unsplash.com/photo-1624996379697-f01d168b1a52?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="" />
+
+                            <div>
+                                <p className="mt-6 text-sm text-blue-500 uppercase">Want to know</p>
+
+                                <h1 className="max-w-lg mt-4 text-2xl font-semibold leading-tight text-gray-800 dark:text-white">
+                                    What do you want to know about UI
+                                </h1>
+
+                                <div className="flex items-center mt-6">
+                                    <img className="object-cover object-center w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1531590878845-12627191e687?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80" alt="" />
+
+                                    <div className="mx-4">
+                                        <h1 className="text-sm text-gray-700 dark:text-gray-200">Amelia. Anderson</h1>
+                                        <p className="text-sm text-gray-500 dark:text-gray-400">Lead Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-8 lg:w-1/4 lg:mt-0 lg:px-6">
+                            <div>
+                                <h3 className="text-blue-500 capitalize">Design instument</h3>
+
+                                <a href="#" className="block mt-2 font-medium text-gray-700 hover:underline hover:text-gray-500 dark:text-gray-400 ">
+                                    How to raise $100k+ by using blox ui kit on your design
+                                </a>
+                            </div>
+
+                            <hr className="my-6 border-gray-200 dark:border-gray-700" />
+
+                            <div>
+                                <h3 className="text-blue-500 capitalize">UI Resource</h3>
+
+                                <a href="#" className="block mt-2 font-medium text-gray-700 hover:underline hover:text-gray-500 dark:text-gray-400 ">
+                                    Should you creat UI Product by using Blox?
+                                </a>
+                            </div>
+
+                            <hr className="my-6 border-gray-200 dark:border-gray-700" />
+
+                            <div>
+                                <h3 className="text-blue-500 capitalize">Premium Collection</h3>
+
+                                <a href="#" className="block mt-2 font-medium text-gray-700 hover:underline hover:text-gray-500 dark:text-gray-400 ">
+                                    Top 10 Blocks you can get on Blox's collection.
+                                </a>
+                            </div>
+
+                            <hr className="my-6 border-gray-200 dark:border-gray-700" />
+
+                            <div>
+                                <h3 className="text-blue-500 capitalize">Premium kits</h3>
+
+                                <a href="#" className="block mt-2 font-medium text-gray-700 hover:underline hover:text-gray-500 dark:text-gray-400 ">
+                                    Top 10 Ui kit you can get on Blox's collection.
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -13,10 +13,10 @@ const Register = () => {
       e.preventDefault();
       const response = await fetch('http://localhost:3000/register',{
         method:'POST',
-        body: JSON.stringify({username, email, password, confirmPassword}),
+        body: JSON.stringify({ username, email, password, confirmPassword }),
         headers:{'Content-Type':'application/json'}
       })
-      if (!response){
+      if (!response.ok){
         alert('Registration Failed')
       }
       else{
