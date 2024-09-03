@@ -13,7 +13,7 @@ const secret = 'asdfghjkl'
 const registerUser = asyncHandler(async (req, res) => {
 
     //take the input fields from client
-    const { username, email, password, confirmPassword } = req.body;
+    const { username, email, profileImage ,password, confirmPassword } = req.body;
 
     //validate
     if (password !== confirmPassword) {
@@ -31,7 +31,8 @@ const registerUser = asyncHandler(async (req, res) => {
         const user = await User.create({
             username,
             email,
-            password: hashedPassword
+            password: hashedPassword, 
+            profileImage
         });
         res.status(201).json({ username, email });
     } catch (error) {
@@ -56,7 +57,8 @@ const loginUser = asyncHandler(async(req,res) => {
         res.status(201).json({
             _id:user._id,
             username:user.username,
-            email:user.email
+            email:user.email,
+            profileImage:user.profileImage
         })
        
     } else {
@@ -70,14 +72,34 @@ const loginUser = asyncHandler(async(req,res) => {
 // GET
 // /profile
 
-const profileUser = (req,res) => {
-    const {token} = req.cookies;
-    jwt.verify(token, secret, {}, (err, info)=>{
-        if (err) throw err;
-        res.json(info)
-    });
+const profileUser = asyncHandler(async (req, res) => {
+    const { token } = req.cookies;
     
-}
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided' });
+    }
+
+    jwt.verify(token, secret, async (err, decoded) => {
+        if (err) {
+            return res.status(403).json({ message: 'Invalid token' });
+        }
+
+        const username = decoded.username;
+        const user = await User.findOne({ username });
+
+        if (user) {
+            res.json({
+                _id: user._id,
+                username: user.username,
+                email: user.email,
+                profileImage: user.profileImage
+            });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    });
+});
+
 
 // logout 
 // POST
