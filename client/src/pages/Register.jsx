@@ -6,7 +6,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [profileImage, setProfileImage] = useState('');
+  const [profileImage, setProfileImage] = useState({myFile:''});
   const navigate = useNavigate();
 
 
@@ -29,13 +29,25 @@ const Register = () => {
 
   }
 
-  const fileInput = (e) => {
+  const fileInput = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imgUrl = URL.createObjectURL(file);
-      setProfileImage(imgUrl)
-      console.log(imgUrl)
+      const base64 = await convertToBase64(file);
+      setProfileImage(base64);
     }
+  }
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result)
+      }
+      fileReader.onerror = (error) => {
+        reject(error)
+      }
+    })
   }
   return (
     <>
@@ -77,7 +89,7 @@ const Register = () => {
 
                   <h2 className="mx-3 text-gray-400">Profile Photo</h2>
 
-                  <input id="dropzone-file" type="file" className='hidden' onChange={e => fileInput(e)} />
+                  <input id="dropzone-file" type="file" className='hidden' onChange={e => fileInput(e)} accept='.jpg, .jpeg, .png'/>
                 </label>
 
                 <div className="relative flex items-center mt-6">
@@ -112,11 +124,7 @@ const Register = () => {
 
                 <div className="mt-6">
                   <input type='submit' value={'Register'} className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
-                  {/* {profileImage && (
-                    <div className="mt-4">
-                      <img src={profileImage} alt="Profile Preview" className="h-32 w-32 object-cover rounded-full" />
-                    </div>
-                  )} */}
+                  
 
                   <div className="mt-6 text-center ">
                     <Link to={'/login'}>

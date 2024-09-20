@@ -18,23 +18,21 @@ function Navbar() {
                     method: 'GET',
                     credentials: 'include'
                 });
-
+    
                 if (!response.ok) {
                     throw new Error('Failed to fetch user information');
                 }
-
+    
                 const userInfo = await response.json();
                 setUsername(userInfo.username);
-                setEmail(userInfo.email)
-                setPfp(userInfo.profileImage.replace("blob:", "")); 
-                
+                setEmail(userInfo.email);
+                setPfp(userInfo.profileImage);
                 
             } catch (error) {
                 console.error('Error fetching user info:', error);
-
             }
         };
-
+    
         fetchUserInfo();
     }, []);
 

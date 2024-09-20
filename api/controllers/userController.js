@@ -34,7 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
             password: hashedPassword, 
             profileImage
         });
-        res.status(201).json({ username, email });
+        res.status(201).json({ username, email, profileImage });
     } catch (error) {
         console.error('Error during user registration:', error); 
         res.status(400).json({ message: 'User registration not successful', error: error.message });
@@ -113,4 +113,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     }
 });
 
-export { registerUser,loginUser, profileUser, logoutUser };
+const createPost = asyncHandler(async (req,res)=>{
+    console.log(req);
+})
+export { registerUser,loginUser, profileUser, logoutUser, createPost };

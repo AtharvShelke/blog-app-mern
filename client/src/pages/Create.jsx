@@ -1,9 +1,44 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'
+import 'react-quill/dist/quill.snow.css';
+
+const modules = {toolbar:[
+  [{'header' : [1,2,false]}],
+  ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+  [{'list':'ordered'}, {'list': 'bullet'}, ],
+  ['link', 'image'],
+  ['clean']
+]}
+
+const formats = [
+  'header',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 
+  'link', 'image'
+]
+
+
 const Create = () => {
+  const [title, setTitle] = useState('');
+  const [summary, setSummary] = useState('');
+  const [files, setFiles] = useState('');  
+  const [content, setContent] = useState('');  
+  const quillRef = useRef(null);
+  const createNewPost = (e) => {
+    const data = new FormData()
+    data.set('title', title);
+    data.set('summary', summary);
+    data.set('content', content);
+    data.set('file', files)
+    e.preventDefault();
+    console.log(files)
+    fetch('http://localhost:3000/post', {
+      method:'POST',
+      body: data
+    });
+  }
   return (
     <>
       <Navbar />
@@ -68,21 +103,37 @@ const Create = () => {
                   <form className="mt-6">
                     <div className="flex-1">
                       <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Title</label>
-                      <input type="text" placeholder="This is my Blog" className="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                      <input name='title' 
+                        type="text" 
+                        placeholder="This is my Blog" 
+                        className="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"  
+                        value={title} 
+                        onChange={e=>setTitle(e.target.value)}/>
                     </div>
                     <div>
                       <label htmlFor="image" className="block text-sm text-gray-500 dark:text-gray-300">Image</label>
 
-                      <input type="file" className="block w-full px-3 py-2 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full dark:file:bg-gray-800 dark:file:text-gray-200 dark:text-gray-300 placeholder-gray-400/70 dark:placeholder-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:focus:border-blue-300" />
+                      <input type="file" 
+                        className="block w-full px-3 py-2 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full dark:file:bg-gray-800 dark:file:text-gray-200 dark:text-gray-300 placeholder-gray-400/70 dark:placeholder-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:focus:border-blue-300"
+                        onChange={e=>{setFiles(e.target.files[0])
+                          
+                        }}/>
                     </div>
                     <div className="flex-1 mt-6">
                       <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Summary</label>
-                      <input type="text" placeholder="Summary of the Blog" className="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" />
+                      <input type="text" 
+                        placeholder="Summary of the Blog" className="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring" 
+                        value={summary} onChange={e=>setSummary(e.target.value)}/>
                     </div>
 
                     <div className="w-full mt-6 text-white">
                       <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Blog</label>
-                      <ReactQuill/>
+                      <ReactQuill 
+                      ref={quillRef}
+                        value={content} 
+                        modules={modules} 
+                        formats={formats} 
+                        onChange={newValue=>setContent(newValue)}/>
                     </div>
 
                     <button className="w-full px-6 py-3 mt-6 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-50">
