@@ -11,7 +11,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch('http://localhost:3000/profile', {
+        const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/profile', {
           method: 'GET',
           credentials: 'include'
         });
@@ -37,7 +37,7 @@ const Profile = () => {
       if (!author) return; // Wait for author to be set
       try {
         const response = await fetch(
-          `http://localhost:3000/post/getPostByAuthor/${author}`,
+          `https://blog-app-mern-backend-ci67.onrender.com/post/getPostByAuthor/${author}`,
           {
             method: 'GET',
             credentials: 'include',
