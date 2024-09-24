@@ -5,7 +5,7 @@ const SidebarPost = (props) => {
     return (
         <>
             <Link to={`/blog/${props._id}`}>
-                <div>
+                <div className='bg-gray-900 p-4 rounded-xl'>
                     <p className="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl">
                         {props.title}
                     </p>

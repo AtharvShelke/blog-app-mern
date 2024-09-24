@@ -11,6 +11,7 @@ const Hero = () => {
     const [thumbnail, setThumbnail] = useState();
     const [author, setAuthor] = useState();
     const [authorPfp, setAuthorPfp] = useState();
+    const [summary, setSummary] = useState();
     
     useEffect(() => {
         const fetchLatestPost = async () => {
@@ -32,7 +33,7 @@ const Hero = () => {
             setThumbnail(post.thumbnail)
             setAuthor(post.author)
             setAuthorPfp(post.authorPfp)
-            
+            setSummary(post.summary)
         }
         fetchLatestPost();
         
@@ -41,25 +42,25 @@ const Hero = () => {
     return (
 
         <>
-            <section className="bg-white dark:bg-gray-900 pt-6">
+            <section className="bg-white dark:bg-gray-950 pt-6">
                 
-                    <div className="container px-6 py-7 mx-auto">
+                    <div className="container px-6 py-7 mx-auto bg-gray-950">
                         <div className="lg:flex lg:-mx-6">
 
                             <div className="lg:w-3/4 lg:px-6">
                                 <Link to={`/blog/${id}`}>
                                     <img className="object-cover object-center w-full h-80 xl:h-[28rem] rounded-xl" src={thumbnail} alt="" />
-                                    <div>
-                                        <h1 className="max-w-lg mt-4 text-2xl font-semibold leading-tight text-gray-800 dark:text-white">
+                                    <div className='bg-gray-900 p-3 mt-4 rounded-xl'>
+                                        <h1 className="max-w-lg text-2xl font-semibold leading-tight text-gray-800 dark:text-white">
                                             {title}
                                         </h1>
-
+                                        <p className='text-sm text-gray-500'>{summary}</p>
                                         <div className="flex items-center mt-4">
                                             <img className="object-cover object-center w-10 h-10 rounded-full" src={authorPfp} alt="" />
 
                                             <div className="mx-4">
-                                                <h1 className="text-sm text-gray-700 dark:text-gray-200">{author}</h1>
-
+                                                <h1 className="text-sm text-gray-200">{author}</h1>
+                                                
                                             </div>
                                         </div>
                                     </div>
