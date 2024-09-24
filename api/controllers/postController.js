@@ -27,13 +27,16 @@ export const getPost = async (req, res) => {
       const post = await Post.findById(req.params.id);
       
       if (!post) {
-        return res.status(404).json({ message: 'Post not found' }); // Return JSON instead of HTML
+        return res.status(404).json({ message: 'Post not found in backend' }); // Return JSON instead of HTML
       }
       
       res.json(post);
+      
     } catch (error) {
       console.error('Error fetching post:', error);
       res.status(500).json({ message: 'Server error', error }); // Return JSON error
     }
   };
+
+
   
