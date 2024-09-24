@@ -113,7 +113,5 @@ const logoutUser = asyncHandler(async (req, res) => {
     }
 });
 
-const createPost = asyncHandler(async (req,res)=>{
-    console.log(req);
-})
-export { registerUser,loginUser, profileUser, logoutUser, createPost };
+
+export { registerUser,loginUser, profileUser, logoutUser };

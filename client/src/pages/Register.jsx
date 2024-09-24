@@ -34,6 +34,7 @@ const Register = () => {
     if (file) {
       const base64 = await convertToBase64(file);
       setProfileImage(base64);
+      console.log(profileImage)
     }
   }
 
@@ -81,18 +82,15 @@ const Register = () => {
 
                   <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Username" onChange={e => { setUsername(e.target.value) }} />
                 </div>
+                <div className="relative flex items-center mt-2">
+                <label htmlFor="image" className="block text-sm text-gray-500 dark:text-gray-300"></label>
 
-                <label htmlFor="dropzone-file" className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                  </svg>
-
-                  <h2 className="mx-3 text-gray-400">Profile Photo</h2>
-
-                  <input id="dropzone-file" type="file" className='hidden' onChange={e => fileInput(e)} accept='.jpg, .jpeg, .png'/>
-                </label>
-
-                <div className="relative flex items-center mt-6">
+                      <input type="file" 
+                        className="block w-full px-3 py-2 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full dark:file:bg-gray-800 dark:file:text-gray-200 dark:text-gray-300 placeholder-gray-400/70 dark:placeholder-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:focus:border-blue-300"
+                        onChange={e=>{fileInput(e)        
+                        }}/>
+</div>
+                <div className="relative flex items-center mt-4">
                   <span className="absolute">
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

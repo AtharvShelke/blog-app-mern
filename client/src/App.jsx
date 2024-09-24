@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Blog from './pages/Blog';
 import Create from './pages/Create';
 import { UserContextProvider } from './context/UserContext.jsx';
+import Profile from './pages/Profile.jsx';
 
 const App = () => {
   return (
@@ -17,8 +18,9 @@ const App = () => {
           <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
-          <Route path='/blog' element={<Blog/>}/>
+          <Route path='/blog/:id' element={<Blog/>}/>
           <Route path='/create' element={<Create/>}/>
+          <Route path='/profile' element={<Profile/>}/>
         </Routes>
       </BrowserRouter>
     </UserContextProvider>

@@ -92,8 +92,8 @@ function Navbar() {
                                             className="absolute right-0 z-20 w-56 py-2 mt-2 overflow-hidden origin-top-right bg-white rounded-md shadow-xl dark:bg-gray-800"
                                             onClick={() => setIsOpen(false)}
                                         >
-                                            <a
-                                                href="#"
+                                            <Link
+                                                to='/profile'
                                                 className="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                                             >
                                                 <img
@@ -105,7 +105,7 @@ function Navbar() {
                                                     <h1 className="text-sm font-semibold text-gray-700 dark:text-gray-200">{username}</h1>
                                                     <p className="text-sm text-gray-500 dark:text-gray-400">{email}</p>
                                                 </div>
-                                            </a>
+                                            </Link>
 
                                             <hr className="border-gray-200 dark:border-gray-700" />
                                             <Link to='/create'>

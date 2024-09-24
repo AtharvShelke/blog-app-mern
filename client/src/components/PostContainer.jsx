@@ -1,8 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Post from './Post'
 
 const PostContainer = () => {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/post/', {
+          method: 'GET',
+          credentials: 'include'
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch user information');
+        }
+        const postData = await response.json();
+
+        setPosts(postData)
+
+
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+
+
+    };
+    fetchPost();
+
+  }, []);
   return (
+
     <>
       <section className="bg-white dark:bg-gray-900">
         <div className="container px-6 py-10 mx-auto">
@@ -16,15 +43,11 @@ const PostContainer = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-8 mt-8 lg:grid-cols-2">
-           
+            {
+              posts.length > 0 && posts.map((post,i)=>(<Post key={post._id} {...post}/>))
+            }
 
-           <Post/>
-           <Post/>
-           <Post/>
-           <Post/>
-           <Post/>
-           <Post/>
-           
+
           </div>
         </div>
       </section>

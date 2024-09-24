@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from 'react-router-dom';
 
 const modules = {toolbar:[
   [{'header' : [1,2,false]}],
@@ -23,21 +24,74 @@ const formats = [
 const Create = () => {
   const [title, setTitle] = useState('');
   const [summary, setSummary] = useState('');
-  const [files, setFiles] = useState('');  
+  const [thumbnail, setThumbnail] = useState('');
   const [content, setContent] = useState('');  
+  const [author, setAuthor] = useState('');
+  const [authorPfp, setAuthorPfp] = useState('');
   const quillRef = useRef(null);
-  const createNewPost = (e) => {
-    const data = new FormData()
-    data.set('title', title);
-    data.set('summary', summary);
-    data.set('content', content);
-    data.set('file', files)
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+        try {
+            const response = await fetch('http://localhost:3000/profile', {
+                method: 'GET',
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch user information');
+            }
+
+            const userInfo = await response.json();
+            setAuthor(userInfo.username);
+            
+            setAuthorPfp(userInfo.profileImage);
+            
+        } catch (error) {
+            console.error('Error fetching user info:', error);
+        }
+    };
+
+    fetchUserInfo();
+}, []);
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result)
+      }
+      fileReader.onerror = (error) => {
+        reject(error)
+      }
+    })
+  }
+  const fileInput = async (e) => {
+    const file = e.target.files[0]
+    if (file){
+      const pic = await convertToBase64(file);
+      setThumbnail(pic);
+      console.log(pic);
+    }
+  }
+  const createNewPost = async (e) => {
     e.preventDefault();
-    console.log(files)
-    fetch('http://localhost:3000/post', {
+    
+    const response = await fetch('http://localhost:3000/post/create', {
       method:'POST',
-      body: data
+      body:JSON.stringify({title, thumbnail, summary, content, author, authorPfp}),
+      headers: { 'Content-Type': 'application/json' }
     });
+    if (!response.ok) {
+      console.log(response)
+      alert('Post creation failed');
+    } else {
+      alert('Post Created successfully');
+      navigate('/');
+    }
+    
   }
   return (
     <>
@@ -100,7 +154,7 @@ const Create = () => {
                     Let Your Creativity Flow~
                   </p>
 
-                  <form className="mt-6">
+                  <form className="mt-6" onSubmit={createNewPost}>
                     <div className="flex-1">
                       <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Title</label>
                       <input name='title' 
@@ -110,12 +164,18 @@ const Create = () => {
                         value={title} 
                         onChange={e=>setTitle(e.target.value)}/>
                     </div>
-                    <div>
+                    <div className="flex-1 mt-6">
                       <label htmlFor="image" className="block text-sm text-gray-500 dark:text-gray-300">Image</label>
 
                       <input type="file" 
-                        className="block w-full px-3 py-2 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full dark:file:bg-gray-800 dark:file:text-gray-200 dark:text-gray-300 placeholder-gray-400/70 dark:placeholder-gray-500 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:focus:border-blue-300"
-                        onChange={e=>{setFiles(e.target.files[0])
+                        className="block w-full px-3 py-2 mt-2 text-sm text-gray-600 bg-white border
+                         border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm
+                          file:px-4 file:py-1 file:border-none file:rounded-full dark:file:bg-gray-800 dark:file:text-gray-200
+                           dark:text-gray-300 placeholder-gray-400/70 dark:placeholder-gray-500 focus:border-blue-400
+                            focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600
+                            dark:bg-gray-900 dark:focus:border-blue-300"
+                        onChange={e=>{
+                          fileInput(e)
                           
                         }}/>
                     </div>
