@@ -20,7 +20,7 @@ function Navbar() {
                 });
     
                 if (!response.ok) {
-                    throw new Error('Failed to fetch user information');
+                    console.log('Failed to fetch user information');
                 }
     
                 const userInfo = await response.json();
@@ -57,7 +57,7 @@ function Navbar() {
     }
     return (
         <>
-            <header className="text-gray-400 bg-gray-900 body-font">
+            <header className="text-gray-400 bg-gray-900 body-font border-b border-gray-600">
                 <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                     <Link to='/'>
                         <p className="flex title-font font-medium items-center text-white mb-4 md:mb-0 cursor-pointer">

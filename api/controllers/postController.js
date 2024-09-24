@@ -46,4 +46,21 @@ export const getLatestPost = async (req,res) => {
   res.json(data)
 }
 
+export const getPostByAuthor = async(req,res)=>{
+  
+  try {
+    const post = await Post.find({author:req.params.author});
+    
+    if (!post) {
+      return res.status(404).json({ message: '' }); // Return JSON instead of HTML
+    }
+    
+    res.json(post);
+    
+  } catch (error) {
+    console.error('Error fetching post:', error);
+    res.status(500).json({ message: 'Server error', error }); // Return JSON error
+  }
+  
+}
   
