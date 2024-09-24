@@ -14,7 +14,7 @@ function Navbar() {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const response = await fetch('http://localhost:3000/profile', {
+                const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/profile', {
                     method: 'GET',
                     credentials: 'include'
                 });
@@ -38,7 +38,7 @@ function Navbar() {
 
     const logout = async () => {
         try {
-            const response = await fetch('http://localhost:3000/logout', {
+            const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/logout', {
                 method: 'POST',
                 credentials: 'include'
             })
