@@ -38,5 +38,12 @@ export const getPost = async (req, res) => {
     }
   };
 
+export const getLatestPost = async (req,res) => {
+  const latestRecord = await Post.find();
+  
+  const index = latestRecord.length-1;
+  const data = latestRecord[index]
+  res.json(data)
+}
 
   

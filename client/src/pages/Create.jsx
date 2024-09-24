@@ -73,7 +73,7 @@ const Create = () => {
     if (file){
       const pic = await convertToBase64(file);
       setThumbnail(pic);
-      console.log(pic);
+      
     }
   }
   const createNewPost = async (e) => {

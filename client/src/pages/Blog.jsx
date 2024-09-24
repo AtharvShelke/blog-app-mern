@@ -40,7 +40,7 @@ const Blog = () => {
                     return (
                         <div className="flex justify-center mt-10 mb-10">
                             <img
-                                className="object-cover w-full h-96 rounded-xl lg:w-4/5"
+                                className="object-contain w-full h-98 rounded-xl lg:w-4/5"
                                 src={domNode.attribs.src} // Use the src attribute of the img tag
                                 alt={domNode.attribs.alt || 'Blog Image'} // Provide an alt tag if available
                             />
