@@ -18,23 +18,27 @@ function Navbar() {
                     method: 'GET',
                     credentials: 'include'
                 });
-
+    
                 if (!response.ok) {
-                    console.log('Failed to fetch user information');
+                    // Add more detailed logging for the response
+                    const errorMessage = await response.text();
+                    console.error('Error fetching user information:', errorMessage);
+                    return;
                 }
-
+    
                 const userInfo = await response.json();
                 setUsername(userInfo.username);
                 setEmail(userInfo.email);
                 setPfp(userInfo.profileImage);
-
+    
             } catch (error) {
-                console.error('Error fetching user info:', error);
+                console.error('Network or Server Error:', error);
             }
         };
-
+    
         fetchUserInfo();
     }, []);
+    
 
     const logout = async () => {
         try {
