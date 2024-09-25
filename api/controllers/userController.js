@@ -73,6 +73,7 @@ const loginUser = asyncHandler(async(req,res) => {
 // /profile
 
 const profileUser = asyncHandler(async (req, res) => {
+    console.log("Cookies:", req.cookies); 
     const { token } = req.cookies;
     
     if (!token) {
