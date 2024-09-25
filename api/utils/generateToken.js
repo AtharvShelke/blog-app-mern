@@ -6,12 +6,14 @@ const generateToken = (res, username) => {
     const token = jwt.sign({ username }, secret, {
         expiresIn: '1d'
     });
+
     res.cookie('token', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // only secure in production
-        sameSite: 'strict',
-        maxAge: 1000 * 60 * 60 * 24
-    })
+        httpOnly: true, // Prevents client-side JS access
+        secure: process.env.NODE_ENV === 'production', // Only set for HTTPS in production
+        sameSite: 'strict', // Strict same-site policy
+        maxAge: 1000 * 60 * 60 * 24 // 1 day
+    });
+
     console.log('Token Generated:', token);
 }
 
