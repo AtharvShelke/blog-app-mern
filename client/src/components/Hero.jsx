@@ -16,7 +16,7 @@ const Hero = () => {
     useEffect(() => {
         const fetchLatestPost = async () => {
             
-            const response = await fetch('http://localhost:3000/post/getLatestPost', {
+            const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/post/getLatestPost', {
                 method: 'GET'
 
             });
