@@ -64,7 +64,9 @@ const Register = () => {
 
               <form className="w-full max-w-md" onSubmit={register}>
                 <div className="flex justify-center mx-auto">
-                  <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="" />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-16 h-16 text-white p-2 bg-gray-700 rounded-full" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                  </svg>
                 </div>
 
                 <div className="flex items-center justify-center mt-6">

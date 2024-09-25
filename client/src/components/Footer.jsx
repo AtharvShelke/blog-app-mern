@@ -112,7 +112,7 @@ const Footer = () => {
         <div className="flex flex-col items-center justify-between sm:flex-row">
           <a href='https://atharv-shelke.netlify.app/' target='_blank'>
             <p className="flex title-font font-medium items-center text-white mb-4 md:mb-0 cursor-pointer">
-              <img src="/src/assets/pfp.jpg" alt="" className='object-cover object-center w-10 h-10 rounded-full' />
+              <img src="/assets/pfp.jpg" alt="" className='object-cover object-center w-10 h-10 rounded-full' />
 
               <span className="ml-3 text-xl">Atharv Shelke</span>
             </p>
