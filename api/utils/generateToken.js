@@ -10,7 +10,8 @@ const generateToken = (res, username) => {
     res.cookie('token', token, {
         httpOnly: true, // Prevents client-side JS access
         secure: process.env.NODE_ENV === 'production', // Only set for HTTPS in production
-        sameSite: 'strict', // Strict same-site policy
+        sameSite: 'none', // Strict same-site policy
+        domain:'https://blog-app-mern-backend-ci67.onrender.com',
         maxAge: 1000 * 60 * 60 * 24 // 1 day
     });
 

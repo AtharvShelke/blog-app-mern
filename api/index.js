@@ -15,13 +15,13 @@ const port = process.env.PORT;
 const app = express();
 
 app.use(express.json({limit:'50mb'}));
-app.use(cookieParser())
+
 
 app.use(cors({
     origin:'https://blog-app-mern-frontend-lrsj.onrender.com',
     credentials:true,
 }));
-
+app.use(cookieParser())
 app.use('/', userRoutes);
 app.use('/post', postRoutes);
 

@@ -47,26 +47,24 @@ const registerUser = asyncHandler(async (req, res) => {
 // Login User
 // POST 
 // /login
-const loginUser = asyncHandler(async(req,res) => {
-    
-    const {username, password} = req.body;
-    const user = await User.findOne({ username })
-    if(user && (await bcrypt.compare(password, user.password))){
+const loginUser = asyncHandler(async (req, res) => {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
 
+    if (user && (await bcrypt.compare(password, user.password))) {
+        console.log('User authenticated:', user.username); // Log user
         generateToken(res, username);
         res.status(201).json({
-            _id:user._id,
-            username:user.username,
-            email:user.email,
-            profileImage:user.profileImage
-        })
-       
+            _id: user._id,
+            username: user.username,
+            email: user.email,
+            profileImage: user.profileImage
+        });
     } else {
-        res.status(400).json({message:'Invalid Credentials'})
-        
+        res.status(400).json({ message: 'Invalid Credentials' });
     }
-    
 });
+
 
 // get user profile
 // GET
