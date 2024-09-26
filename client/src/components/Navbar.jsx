@@ -17,9 +17,7 @@ function Navbar() {
                 const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/profile', {
                     method: 'GET',
                     credentials: 'include', // Ensures cookies are sent
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
+                    
                 });
     
                 if (!response.ok) {
@@ -34,7 +32,7 @@ function Navbar() {
                 setUsername(userInfo.username);
                 setEmail(userInfo.email);
                 setPfp(userInfo.profileImage);
-                localStorage.setItem();
+                localStorage.setItem('token')
             } catch (error) {
                 console.error('Network or Server Error:', error);
             }
