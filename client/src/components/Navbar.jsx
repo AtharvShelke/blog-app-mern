@@ -16,7 +16,10 @@ function Navbar() {
             try {
                 const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/profile', {
                     method: 'GET',
-                    credentials: 'include'
+                    credentials: 'include', // Ensures cookies are sent
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
                 });
     
                 if (!response.ok) {
@@ -27,6 +30,7 @@ function Navbar() {
                 }
     
                 const userInfo = await response.json();
+                // Assuming setUsername, setEmail, and setPfp are defined as state setters
                 setUsername(userInfo.username);
                 setEmail(userInfo.email);
                 setPfp(userInfo.profileImage);
@@ -37,7 +41,13 @@ function Navbar() {
         };
     
         fetchUserInfo();
-    }, []);
+    
+        // Cleanup function to cancel the request if component unmounts
+        return () => {
+            // Abort fetch if needed (optional, only necessary if you add aborting logic)
+        };
+    }, []); // Empty array as dependencies to run once after mounting
+    
     
 
     const logout = async () => {
