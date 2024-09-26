@@ -34,7 +34,7 @@ function Navbar() {
                 setUsername(userInfo.username);
                 setEmail(userInfo.email);
                 setPfp(userInfo.profileImage);
-    
+                localStorage.setItem();
             } catch (error) {
                 console.error('Network or Server Error:', error);
             }

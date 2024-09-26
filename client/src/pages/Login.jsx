@@ -24,7 +24,7 @@ const Login = () => {
 
      //localStorage.setItem('token', data.token)
       setUserInfo(data)
-
+      console.log(data)
 
       navigate('/')
 
