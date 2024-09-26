@@ -53,7 +53,11 @@ const loginUser = asyncHandler(async (req, res) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
         console.log('User authenticated:', user.username); // Log user
-        generateToken(res, username);
+        generateToken(res, username); // Sets the token in a cookie
+        
+        // Log the cookies in the response to verify it's set
+        console.log('Cookies sent in response:', res.get('Set-Cookie'));
+
         res.status(201).json({
             _id: user._id,
             username: user.username,
@@ -64,6 +68,7 @@ const loginUser = asyncHandler(async (req, res) => {
         res.status(400).json({ message: 'Invalid Credentials' });
     }
 });
+
 
 
 // get user profile
@@ -100,6 +105,7 @@ const profileUser = asyncHandler(async (req, res) => {
         }
     });
 });
+
 
 
 // logout 
