@@ -9,9 +9,9 @@ const generateToken = (res, username) => {
 
     res.cookie('token', token, {
         httpOnly: true, // Prevents client-side JS access
-        secure: 'production', // Only set for HTTPS in developement
-        sameSite: 'none', // Strict same-site policy
-        domain:'https://blog-app-mern-backend-ci67.onrender.com',
+        secure: true, // Only set for HTTPS in developement
+        sameSite: 'None',
+        domain:'blog-app-mern-backend-ci67.onrender.com',
         maxAge: 1000 * 60 * 60 * 24 // 1 day
     });
 
@@ -21,8 +21,8 @@ const generateToken = (res, username) => {
 const deleteToken = (res) => {
     res.clearCookie('token', {
         httpOnly: true,
-        secure:'production',
-        sameSite: 'none',
+        secure:true,
+        sameSite: 'None',
     });
 
     console.log('Token Destroyed');
