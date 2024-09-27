@@ -73,7 +73,7 @@ const Blog = () => {
                 {error && <p>{error}</p>}
                 {post ? (
                     <div className="container px-3 mx-auto text-center">
-                        <div className="w-11/12 lg:w-3/5 mx-auto bg-gray-900 py-5 lg:py-10 px-4 lg:px-8">
+                        <div className="w-11/12 lg:w-3/5 mx-auto bg-gray-900 py-5 lg:py-10 lg:px-8">
                             <h1 className="text-3xl font-semibold text-white lg:text-4xl">{post.title}</h1>
                             <img className='mx-auto mt-8 mb-6' src={post.thumbnail}/>
                             <p className="mt-6 text-gray-500 dark:text-gray-300 mb-6">{post.summary}</p>
