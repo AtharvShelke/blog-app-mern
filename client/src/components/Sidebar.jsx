@@ -6,7 +6,7 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/post/', {
+        const response = await fetch('https://blogappmern-azure.vercel.app/post/', {
           method: 'GET',
           credentials: 'include'
         });

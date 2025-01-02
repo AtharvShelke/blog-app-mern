@@ -12,7 +12,7 @@ const Login = () => {
   const loginUser = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/login', {
+    const response = await fetch('https://blogappmern-azure.vercel.app/login', {
       method: 'POST',
       body: JSON.stringify({ username, password }),     //sending data to backend
       headers: { 'Content-Type': 'application/json' },
