@@ -50,7 +50,7 @@ function Navbar() {
 
     const logout = async () => {
         try {
-            const response = await fetch('https://blogappmern-azure.vercel.app/logout', {
+            const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/logout', {
                 method: 'POST',
                 credentials: 'include'
             })

@@ -18,7 +18,7 @@ app.use(express.json({limit:'50mb'}));
 
 
 app.use(cors({
-    origin:'https://blogappmern-azure.vercel.app',
+    origin:'https://blog-app-mern-frontend-lrsj.onrender.com.app',
     credentials:true,
 }));
 app.use(cookieParser())

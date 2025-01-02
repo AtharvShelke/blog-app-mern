@@ -79,7 +79,7 @@ const Create = () => {
   const createNewPost = async (e) => {
     e.preventDefault();
     
-    const response = await fetch('https://blogappmern-azure.vercel.app/post/create', {
+    const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/post/create', {
       method:'POST',
       body:JSON.stringify({title, thumbnail, summary, content, author, authorPfp}),
       headers: { 'Content-Type': 'application/json' }
