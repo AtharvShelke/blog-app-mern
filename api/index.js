@@ -18,9 +18,10 @@ app.use(express.json({limit:'50mb'}));
 
 
 app.use(cors({
-    origin:'https://blog-app-mern-liard.vercel.app',
-    credentials:true,
+    origin: 'https://blog-app-mern-liard.vercel.app',
+    credentials: true,
 }));
+
 app.use(cookieParser())
 app.use('/', userRoutes);
 app.use('/post', postRoutes);
