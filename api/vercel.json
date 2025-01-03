@@ -1,12 +1,23 @@
 {
-    "version":2,
-    "builds":[
-        { "src":"*.js", "use":"@vercel/node" }
+    "version": 2,
+    "builds": [
+        { "src": "*.js", "use": "@vercel/node" }
     ],
-    "routes":[
+    "routes": [
         {
-            "src":"/(/*)",
-            "dest":"/"
+            "src": "/(.*)",
+            "dest": "/"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                { "key": "Access-Control-Allow-Origin", "value": "https://blog-app-mern-liard.vercel.app" },
+                { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS" },
+                { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization, X-Requested-With" },
+                { "key": "Access-Control-Allow-Credentials", "value": "true" }
+            ]
         }
     ]
 }
