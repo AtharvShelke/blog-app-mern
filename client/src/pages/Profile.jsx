@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SidebarPost from '../components/SidebarPost';
@@ -11,7 +11,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/profile', {
+        const response = await fetch('https://blog-app-mern-api.vercel.app/profile', {
           method: 'GET',
           credentials: 'include'
         });
@@ -37,7 +37,7 @@ const Profile = () => {
       if (!author) return; // Wait for author to be set
       try {
         const response = await fetch(
-          `https://blog-app-mern-backend-ci67.onrender.com/post/getPostByAuthor/${author}`,
+          `https://blog-app-mern-api.vercel.app/post/getPostByAuthor/${author}`,
           {
             method: 'GET',
             credentials: 'include',

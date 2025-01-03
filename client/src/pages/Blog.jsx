@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import parse from 'html-react-parser'; // Import the parser
 import Navbar from '../components/Navbar';
@@ -13,7 +13,7 @@ const Blog = () => {
     useEffect(() => {
         const getPost = async () => {
             try {
-                const response = await fetch(`https://blog-app-mern-backend-ci67.onrender.com/post/getPost/${id}`, {
+                const response = await fetch(`https://blog-app-mern-api.vercel.app/post/getPost/${id}`, {
                     method: 'GET'
                 });
                 if (!response.ok) {

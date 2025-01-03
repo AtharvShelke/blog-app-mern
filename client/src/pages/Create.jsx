@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ReactQuill from 'react-quill';
@@ -34,7 +34,7 @@ const Create = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
         try {
-            const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/profile', {
+            const response = await fetch('https://blog-app-mern-api.vercel.app/profile', {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -79,7 +79,7 @@ const Create = () => {
   const createNewPost = async (e) => {
     e.preventDefault();
     
-    const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/post/create', {
+    const response = await fetch('https://blog-app-mern-api.vercel.app/post/create', {
       method:'POST',
       body:JSON.stringify({title, thumbnail, summary, content, author, authorPfp}),
       headers: { 'Content-Type': 'application/json' }

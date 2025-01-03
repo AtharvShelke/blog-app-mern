@@ -6,7 +6,7 @@ const PostContainer = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/post/', {
+        const response = await fetch('https://blog-app-mern-api.vercel.app/post/', {
           method: 'GET',
           credentials: 'include'
         });

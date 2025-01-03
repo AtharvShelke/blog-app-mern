@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -12,7 +12,7 @@ const Register = () => {
 
   const register = async (e) => {
     e.preventDefault();
-    const response = await fetch('https://blog-app-mern-backend-ci67.onrender.com/register', {
+    const response = await fetch('https://blog-app-mern-api.vercel.app/register', {
       method: 'POST',
       body: JSON.stringify({ username, email, profileImage, password, confirmPassword }),
       headers: { 'Content-Type': 'application/json' }
