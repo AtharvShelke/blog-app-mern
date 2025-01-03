@@ -21,6 +21,12 @@ app.use(cors({
     origin: 'https://blog-app-mern-liard.vercel.app',
     credentials: true,
 }));
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://blog-app-mern-liard.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
 
 app.use(cookieParser())
 app.use('/', userRoutes);
