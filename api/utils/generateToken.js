@@ -11,7 +11,7 @@ const generateToken = (res, username) => {
         httpOnly: true, // Prevents client-side JS access
         secure: true, // Only set for HTTPS in developement
         sameSite: 'None',
-        domain:'blogappmern-azure.vercel.app.com',
+        domain:'blog-app-mern-api.vercel.app',
         maxAge: 1000 * 60 * 60 * 24 // 1 day
     });
 
